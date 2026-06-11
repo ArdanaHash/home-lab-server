@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 include 'db.php';
 
 $error_message = '';
@@ -23,7 +25,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
