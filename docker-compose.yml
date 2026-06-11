@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web-lab:
+    image: nginx:latest
+    container_name: web-lab
+    ports:
+      - "8081:80"
+    volumes:
+      - ./www:/usr/share/nginx/html
+    networks:
+      - lab-cyber-network
+    restart: always
+
+  lab-db:
+    image: mariadb:10.11
+    container_name: lab-db
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password
+      MYSQL_DATABASE: lab_security
+    networks:
+      - lab-cyber-network
+    restart: always
+
+  kali-lab:
+    image: kalilinux/kali-rolling:latest
+    container_name: kali-lab
+    networks:
+      - lab-cyber-network
+    stdin_open: true
+    tty: true
+    restart: always
+
+networks:
+  lab-cyber-network:
+    driver: bridge
